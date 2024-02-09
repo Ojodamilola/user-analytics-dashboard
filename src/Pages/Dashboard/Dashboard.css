@@ -1,0 +1,20 @@
+.dashboard {
+  width: 100%;
+  padding: 0px;
+  background-color: var(--bg-color);
+}
+.mainContent {
+  width: 80%;
+  padding: 20px;
+}
+.cardMargin{
+  margin-right: 5px;
+}
+@media (max-width: 500px) {
+  .sideBar {
+    width: 15%;
+  }
+  .mainContent {
+   width: 85%;
+ }
+}
