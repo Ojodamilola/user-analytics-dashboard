@@ -1,7 +1,7 @@
-import React, { useState, } from "react";
+import React, { useState,  } from "react";
 //import "./Signup.css";
-import { Form, Button, Card, Container, Alert } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Form, Button, Card, Container, Alert, } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 const Signup = () => {
   /*
@@ -12,10 +12,10 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
- const { signup } = useAuth();
+ const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  
+  const navigate = useNavigate();
  
 
   const handleSubmit = async (e) => {
@@ -28,6 +28,7 @@ const Signup = () => {
       setError("");
       setLoading(true);
       await signup(email, password);
+      navigate('/');
     } catch (error) {
       console.log(error);
       setError("Failed to create an account");
@@ -44,10 +45,9 @@ const Signup = () => {
         <div className="w-100 signup" style={{ maxWidth: "400px", marginTop:'10%', }}>
           <Card>
             <Card.Body>
+              {<p>{currentUser && currentUser.email}</p>}
               <h2 className="text-center mb-2"> Sign Up</h2>{" "}
-              <h1 className="closeBtn">
-                <Link to="/">X</Link>
-              </h1>
+              
               {/*<p>{currentUser.email}</p>*/}
               {error && <Alert variant="danger">{error}</Alert>}
               <Form onSubmit={handleSubmit}>
@@ -83,15 +83,14 @@ const Signup = () => {
                   className="w-100 mt-3 h-100 btn-dark"
                   type="submit"
                 >
-                  Sign Up
+                 {loading ? <div className="spinner-border text-secondary" role="status"><span className="sr-only"></span></div> : "Sign Up"} 
                 </Button>
               </Form>
             </Card.Body>
           </Card>
           <div className="w-100 text-center mt-2">
             Already have an account? <Link to="/login">Log In</Link>
-            <p>dammy3114@gmail.com</p>
-            <p>dammy3114</p>
+            
           </div>
         </div>
       </Container>

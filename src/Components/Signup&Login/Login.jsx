@@ -6,10 +6,10 @@ import { Link,  useNavigate } from "react-router-dom"
 export default function Login() {
   const emailRef = useRef()
   const passwordRef = useRef()
-  const login = useAuth();
+  const {login, currentUser} = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useNavigate()
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -18,7 +18,7 @@ export default function Login() {
       setError("")
       setLoading(true)
       await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
+      navigate("/");
     } catch(error) {
       setError("Failed to log in")
       console.log(error)
@@ -33,6 +33,8 @@ export default function Login() {
         <div className="w-100 signup" style={{ maxWidth: "400px", marginTop:'10%', }}>
         <Card>
         <Card.Body>
+        {<p>{currentUser && currentUser.email}</p>}
+        
           <h2 className="text-center mb-4">Log In</h2>
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleSubmit}>
@@ -45,7 +47,7 @@ export default function Login() {
               <Form.Control type="password" ref={passwordRef} required />
             </Form.Group>
             <Button disabled={loading} className="w-100 h-100 mt-3 btn btn-dark" type="submit">
-              Log In
+              {loading ? <div className="spinner-border text-secondary" role="status"><span className="sr-only"></span></div> : "Log In"}
             </Button>
           </Form>
           <div className="w-100 text-center mt-3">

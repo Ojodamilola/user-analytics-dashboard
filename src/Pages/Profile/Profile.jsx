@@ -6,12 +6,15 @@ import {
   Linkedin,
   Twitter,
 } from "react-bootstrap-icons";
+
+import { useAuth } from '../../contexts/AuthContext'
+
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import "./Profile.css";
 import { Link } from "react-router-dom";
 // Professional Profile Component
 const Profile = () => {
- 
+  const { currentUser} = useAuth();
   
   //for edit profile you are going to have a modal or popper or a page. to add sections, education, hobbies, skills,
 
@@ -29,9 +32,9 @@ const Profile = () => {
                 />
               </Button>
               <span className="name mt-3">Lorem Ipsum</span>{" "}
-              <span className="idd">@loremipsum</span>
+              <span className="idd">{currentUser && currentUser.email}</span>
             </div>
-            <div className="d-flex flex-row justify-content-center align-items-center g-2">
+            <div className="d-flex flex-row justify-content-center align-items-center gap-2">
               {" "}
               <span className="idd1">Oxc4c16a645_b21a</span>{" "}
               <span className="copyIcon">
