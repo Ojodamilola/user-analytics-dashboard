@@ -12,7 +12,6 @@ import Login from "./Components/Signup&Login/Login";
 import Signup from "./Components/Signup&Login/Signup";
 import Roles from "./Components/Roles/Roles";
 import ForgotPassword from "./Components/Signup&Login/ForgotPassword";
-import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 
 function App() {
   return (
